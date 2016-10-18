@@ -1,0 +1,59 @@
+<h1>Support Request</h1>
+<!-- <h2><%= @name %></h2> -->
+<div>
+  <%= form_tag("/search", method: "get") do %>
+  <%= label_tag(:content, "Search for:") %>
+  <%= text_field_tag(:content) %>
+  <%= submit_tag("Search") %>
+<% end %>
+</div>
+<hr>
+<div>
+  <table style="width:50%">
+    <tr>
+      <th>&nbsp; &nbsp; &nbsp;</th>
+      <th>Sales</th>
+      <th>Technical</th>
+      <th>Marketing</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <td>Number of Requests</td>
+      <td><%= @sales %></td>
+      <td><%= @technical %></td>
+      <td><%= @marketing %></td>
+      <td><%= @total %></td>
+    </tr>
+  </table>
+</div>
+<hr>
+<div>
+<table style="width:100%">
+  <tr>
+    <th>Name &nbsp; &nbsp; &nbsp;</th>
+    <th>Email</th>
+    <th>department</th>
+    <th>message</th>
+    <th>Actions</th>
+    <th>Mark</th>
+  </tr>
+
+<% @requests.each do |f| %>
+<!-- # <%= link_to f.name,  requests_path(f)%> -->
+<% f.mark == true ? @flag = 'Done' : @flag = 'Undone'  %>
+<tr>
+<td><%=f.name%></td>
+<td><%= link_to f.email,  requests_path%></td>
+<td><%= f.department %></td>
+<td><%= f.message %></td>
+
+<td><%= link_to ' Edit ', edit_request_path(f) %>
+<%= link_to 'Delete', request_path(f),method: :delete, data: {confirm: 'Are you sure'} %>
+</td>
+<td><%= link_to @flag, switch_mark_path(f) %></td>
+</tr>
+<% end %>
+</table>
+
+<%= paginate @requests %>
+</div>

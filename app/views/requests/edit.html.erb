@@ -1,0 +1,27 @@
+<h1>Edit Request</h1>
+<%= @request.errors.full_messages.join(', ') %>
+<%= form_for @request do |f| %>
+ <div>
+   <%= f.label :name %>
+    <%= f.text_field :name %>
+ </div>
+<hr>
+ <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+<hr>
+<%= f.label :department %>
+  <div>
+    <%= f.radio_button :department, 'Sales' %> Sales<br />
+    <%= f.radio_button :department, 'Marketing' %> Marketing<br />
+    <%= f.radio_button :department, 'Technical' %> Technical<br />
+  </div>
+<hr>
+ <div>
+    <%= f.label :message %>
+    <%= f.text_area :message %>
+  </div>
+<hr>
+  <%= f.submit "Save"%>
+<% end %>
